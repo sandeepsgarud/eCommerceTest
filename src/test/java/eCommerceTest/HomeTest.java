@@ -17,6 +17,7 @@ public class HomeTest {
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/DriverExe/chromedriver");
 		driver = new ChromeDriver();
 		driver.get("http://localhost:8070/home");
+
 	}
 	
 	// Title verification test
@@ -27,19 +28,20 @@ public class HomeTest {
 	// Verify all the links in header
 	@Test
 	public void verifyLinksTest() {
-		Assert.assertTrue(driver.findElement(By.linkText("Shop")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.partialLinkText("Shop")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.linkText("Login")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.linkText("Registration")).isDisplayed());
 	}
 	//Verify all the products on first page. Verify buy button does not show up as not logged in. verify navigation links
 	@Test
-	public void verifyProductsTest() {
+	public void verifyProductListTest() {
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Soap')]")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Tooth Brush')]")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Shirt')]")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Office Bag')]")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Bottle')]")).isDisplayed());
 		Assert.assertFalse(isElementPresent(By.xpath("//button[@type='button']")));
+		Assert.assertTrue(driver.findElement(By.className("pagination")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.linkText("next")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.linkText("last »")).isDisplayed());
 	}
@@ -47,7 +49,7 @@ public class HomeTest {
 	//Verify all the products on second page. Verify buy button does not show up as not logged in. verify navigation links
 
 	@Test
-	public void verifyProductsOnNextPageTest() {
+	public void verifyProductListOnNextPageTest() {
 		  driver.findElement(By.linkText("next")).click();
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Wrist Watch')]")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Mobile Phone')]")).isDisplayed());
@@ -55,6 +57,7 @@ public class HomeTest {
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Leather Wallets')]")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(.,'Camera')]")).isDisplayed());
 		Assert.assertFalse(isElementPresent(By.xpath("//button[@type='button']")));
+		Assert.assertTrue(driver.findElement(By.className("pagination")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.linkText("« first")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.linkText("previous")).isDisplayed());
 
@@ -74,5 +77,6 @@ public class HomeTest {
 		driver.quit();
 
 	}
-
+	
+	
 }

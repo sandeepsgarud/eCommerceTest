@@ -70,7 +70,7 @@ public class RegistrationTest {
 
 	// Attempt to submit registration page with no values entered
 	// Commented code does not work as the error messages change their sequence.
-	// Good use case. We either have to raise bug or work around.
+	
 	@Test
 	public void verifyRegistrationWithBlankTest() {
 		driver.get("http://localhost:8070/home");

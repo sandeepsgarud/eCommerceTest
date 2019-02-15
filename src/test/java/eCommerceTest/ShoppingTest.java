@@ -12,7 +12,15 @@ public class ShoppingTest {
 	private WebDriver driver;
 	private HomeTest homeTest;
 
-  @Test
+	 @BeforeTest
+		public void beforeTest() {
+			System.setProperty("webdriver.chrome.driver", "src/test/resources/DriverExe/chromedriver");
+			driver = new ChromeDriver();
+			driver.get("http://localhost:8070/home");
+
+		}
+	//Verify the shopping of one product and whether the stock number changed.
+  @Test 
   public void verifyShoppingCartOneProductTest() {
 		driver.findElement(By.linkText("Login")).click();
 		driver.findElement(By.id("username")).sendKeys("admin");
@@ -29,8 +37,9 @@ public class ShoppingTest {
 		Assert.assertEquals(newstockCount, 0);
 		Assert.assertFalse(homeTest.isElementPresent(By.xpath("//button[@type='button']")));
 		driver.findElement(By.linkText("Sign Out")).click();
-
   }
+  
+  //Verify buying multiple products and verify the sum in shopping cart
   
   @Test
   public void verifyShoppingCartMultipleProductTest() {
@@ -45,6 +54,8 @@ public class ShoppingTest {
 		driver.findElement(By.cssSelector(".btn-danger")).click();
 		driver.findElement(By.linkText("Sign Out")).click();
   }
+  
+  //Verify buying out of stock product.
   
   @Test
   public void verifyShoppingCartOutofStockTest() throws InterruptedException {
@@ -69,13 +80,6 @@ public class ShoppingTest {
 		driver.findElement(By.linkText("Sign Out")).click();
   }
   
-  @BeforeTest
-	public void beforeTest() {
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/DriverExe/chromedriver");
-		driver = new ChromeDriver();
-		driver.get("http://localhost:8070/home");
-
-	}
 
 	@AfterTest
 	public void afterTest() {

@@ -16,7 +16,7 @@ public class LoginTest {
 	@Test
 	public void verifyValidLoginTest() {
 		driver.findElement(By.linkText("Login")).click();
-		driver.findElement(By.id("username")).sendKeys("admin");
+		driver.findElement(By.name("username")).sendKeys("admin");
 		driver.findElement(By.id("password")).sendKeys("admin");
 		driver.findElement(By.cssSelector(".btn")).click();
 		Assert.assertTrue(driver.findElement(By.linkText("Sign Out")).isDisplayed());
